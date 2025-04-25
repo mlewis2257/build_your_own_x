@@ -89,17 +89,19 @@ makeApiCall()
   .then((user) => {
     console.log("In the first .then()");
 
-    console.log(user);
+    return user;
   })
-  .then(() => {
+  .then((user) => {
     console.log(
       `username: ${user.username}'s favorite sport: ${user.favoriteSport}`
     );
-    console.log(user); // same as return user;
+    // console.log(user); // same as
+    return user;
   })
   .then((user) => {
     console.log(`The previous .then() gave you back the user's favorite sport`);
-    console.log(user.profile); // same as return user.profile;
+    // console.log(user.profile); //
+    return user.profile;
   })
   .then((profile) => {
     console.log(`The profile URL is ${profile}`);
