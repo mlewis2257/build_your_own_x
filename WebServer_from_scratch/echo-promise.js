@@ -98,3 +98,20 @@ const newConn = async (socket) => {
 const server = net.createConnection({
   pauseOnConnect: true,
 });
+
+// The code to use the socket now becomes straightforward. There are no callbacks to interrupt the application logic.
+
+// Note that the newConn async function is not awaited anywhere. It is simply invoked as a callback of the listening socket. This means that multiple connections are handled concurrently.
+
+// Exercise for the reader: convert the “accept” primitive to promise-based.
+
+const TCPListener = {
+  socket: net.Socket,
+  // ...
+};
+
+function soListen() {}
+function soAccept(listener) {
+  try {
+  } catch (error) {}
+}
