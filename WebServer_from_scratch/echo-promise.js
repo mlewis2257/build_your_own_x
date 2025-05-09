@@ -53,7 +53,7 @@ const soRead = (conn) => {
   });
 };
 
-const soWrite = (conn = conn, data = buffer) => {
+const soWrite = (conn, data) => {
   console.assert(data.length > 0);
   return new Promise((resolve, reject) => {
     if (conn.err) {
@@ -68,6 +68,31 @@ const soWrite = (conn = conn, data = buffer) => {
       }
     });
   });
+};
+const serveClient = async (socket) => {
+  socket = net.Socket;
+  const conn = soInit(socket);
+  while (true) {
+    const data = await soRead(conn);
+    if (data.length === 0) {
+      console.log("ended connection");
+      return;
+    }
+    console.log("data", data);
+    soWrite(conn, data);
+  }
+};
+// Async/await way
+const newConn = async (socket) => {
+  socket = net.Socket;
+  console.log("new connection", socket.remoteAddress, socket.remotePort);
+  try {
+    await serveClient(socket);
+  } catch (exc) {
+    console.error("exc", exc);
+  } finally {
+    socket.destroy();
+  }
 };
 
 const server = net.createConnection({
