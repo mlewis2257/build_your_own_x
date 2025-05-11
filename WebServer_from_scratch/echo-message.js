@@ -100,8 +100,3 @@ async function serverClient(socket) {
 // The cutMessage() function tells if the message is complete.
 // It returns null if not.
 // Otherwise, it removes the message and returns it.
-
-function cutMessage(dyn = createDynamicBuffer) {
-  // Message are separated by '\n'
-  const idx = buf.data.subarray(0);
-}
