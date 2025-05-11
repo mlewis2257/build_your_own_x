@@ -115,3 +115,15 @@ function soAccept(listener) {
   try {
   } catch (error) {}
 }
+
+// Backpressure in TCP: Flow Control
+// Backpressure in TCP is known as flow control.
+
+// The consumer’s TCP stack stores incoming data in a receive buffer for the application to consume.
+// The amount of data the producer’s TCP stack can send is bounded by a window known to the producer’s TCP stack, and it will pause sending data when the window is full.
+// The consumer’s TCP stack manages the window; when the app drains from the receive buffer, it moves the window forward and notifies the producer’s TCP stack to resume sending.
+// The effect of flow control: TCP can pause and resume transmission so that the consumer’s receive buffer is bounded.
+
+// This is why it's so important in Node.js when creating a TCP.
+// Using callbacks it can be hard to track the order of code execution,
+// so promises help eliminate this
